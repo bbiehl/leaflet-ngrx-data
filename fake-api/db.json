@@ -1,0 +1,49 @@
+{
+    "neighborhoods": [
+        {
+            "id": 1,
+            "name": "Little Bohemia",
+            "url": "https://en.wikipedia.org/wiki/Little_Bohemia_(Omaha,_Nebraska)",
+            "description": "Tempor officia amet dolore et laboris proident.",
+            "imgUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f5/PragueHotelOmaha.JPG",
+            "lat": 41.245556,
+            "lng": -95.933333
+        },
+        {
+            "id": 2,
+            "name": "Dundee",
+            "url": "https://en.wikipedia.org/wiki/Dundee%E2%80%93Happy_Hollow_Historic_District",
+            "description": "Commodo amet duis occaecat eu do in culpa mollit commodo excepteur aute nostrud ullamco ipsum.",
+            "imgUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Dundee_HD_Omaha_NE.JPG/320px-Dundee_HD_Omaha_NE.JPG",
+            "lat": 41.265034,
+            "lng": -95.99038
+        },
+        {
+            "id": 3,
+            "name": "Little Italy",
+            "url": "https://en.wikipedia.org/wiki/Little_Italy,_Omaha",
+            "description": "Cillum enim officia laboris laborum minim voluptate veniam sit sunt cupidatat consectetur elit.",
+            "imgUrl": "https://upload.wikimedia.org/wikipedia/commons/0/09/Joel_N._Cornish_House.jpg",
+            "lat": 41.245278,
+            "lng": -95.921944
+        },
+        {
+            "id": 4,
+            "name": "Benson",
+            "url": "https://en.wikipedia.org/wiki/Benson,_Nebraska",
+            "description": "Laborum aliqua reprehenderit nostrud ad magna fugiat non sint sint duis.",
+            "imgUrl": "https://upload.wikimedia.org/wikipedia/commons/e/ef/Omaha%2C_Nebraska_Maple_Street_N_side_from_60_St-Ave_1.JPG",
+            "lat": 41.285,
+            "lng": -96.009444
+        },
+        {
+            "id": 5,
+            "name": "Field Club",
+            "url": "https://en.wikipedia.org/wiki/Field_Club_(Omaha,_Nebraska)",
+            "description": "Veniam non quis proident laborum do cupidatat nostrud eu nisi culpa.",
+            "imgUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Omaha%2C_Nebraska_Woolworth_Ave_x_36_St_NE_corner.JPG/640px-Omaha%2C_Nebraska_Woolworth_Ave_x_36_St_NE_corner.JPG",
+            "lat": 41.245278,
+            "lng": -95.963889
+        }
+    ]
+}

@@ -138,7 +138,13 @@ UPDATE src/app/app.module.ts (837 bytes)
 <app-map></app-map>
 ```
 ![map component works](./screenshots/)
-5. Generate a service to GET the API data
+5. Generate a service to GET the API data.
+```
+$ ng generate service neighborhoods
+CREATE src/app/neighborhoods.service.spec.ts (392 bytes)
+CREATE src/app/neighborhoods.service.ts (142 bytes)
+```
+
 6. Verify we can GET API data.
 7. Implement [leafletjs](https://leafletjs.com/index.html) for Angular.
 8. Plot the markers with popups.

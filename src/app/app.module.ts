@@ -1,7 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { EntityDataModule } from '@ngrx/data';
+import { DefaultDataServiceConfig, EntityDataModule } from '@ngrx/data';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { AppComponent } from './app.component';
@@ -9,20 +9,23 @@ import { AppRoutingModule } from './app-routing.module';
 import { entityConfig } from './entity-metadata';
 import { MapComponent } from './map/map.component';
 
+const defaultDataServiceConfig: DefaultDataServiceConfig = {
+  root: 'http://localhost:3000/',
+};
+
 @NgModule({
-  declarations: [
-    AppComponent,
-    MapComponent
+    declarations: [AppComponent, MapComponent],
+    imports: [
+        AppRoutingModule,
+        BrowserModule,
+        EffectsModule.forRoot([]),
+        EntityDataModule.forRoot(entityConfig),
+        HttpClientModule,
+        StoreModule.forRoot({}, {}),
   ],
-  imports: [
-    AppRoutingModule,
-    BrowserModule,
-    EffectsModule.forRoot([]),
-    EntityDataModule.forRoot(entityConfig),
-    HttpClientModule,
-    StoreModule.forRoot({}, {}),
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    providers: [
+        { provide: DefaultDataServiceConfig, useValue: defaultDataServiceConfig },
+    ],
+    bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

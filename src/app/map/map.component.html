@@ -1,1 +1,17 @@
-<p>map works!</p>
+<div *ngIf="isLoading$ | async; else elseTemplate">
+    <h1>Fetching neighborhoods...</h1>
+</div>
+
+<pre *ngIf="errors$ | async">
+    {{ errors$ | async | json }}
+</pre>
+
+<ng-template #elseTemplate>
+    <!-- <pre>{{ neighborhoods$ | async | json }}</pre> -->
+    <div *ngFor="let neighborhood of (neighborhoods$ | async)">
+        <h3>{{ neighborhood.name }}</h3>
+        <img src="{{ neighborhood.imgUrl }}" alt="Image of {{ neighborhood.name }}">
+    </div>
+</ng-template>
+
+

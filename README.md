@@ -37,7 +37,7 @@ At the time of this writing I am using the following...
 1. Node v14.15.3
 2. NPM 6.14.9
 3. Angular CLI: 11.0.5
-![versions](../screenshots/versions.png)
+![versions](./screenshots/versions.png)
 
 ### Create a new Angular project
 1. Create new angular project. (I chose strict type checking, add routing, and SCSS)
@@ -50,7 +50,7 @@ $ cd leaflet-ngrx-data
 $ npm run start
 ```
 3. Verify it is working by going to http://localhost:4200/
-![Welcome to Angular](../screenshots/welcome-to-angular.png)
+![Welcome to Angular](./screenshots/welcome-to-angular.png)
 
 ### Set up a fake REST API
 1. Install [JSON Server](https://www.npmjs.com/package/json-server).
@@ -72,14 +72,12 @@ $ touch db.json
 ```
 $ json-server db.json
 ```
-![fake api server](../)
 5. Verify JSON Server is working http://localhost:3000
-![json server running](../screenshots/json-server-running.png)
-![json server localhost](../screenshots/json-server-localhost.png)
+![json server running](./screenshots/json-server-running.png)
+![json server localhost](./screenshots/json-server-localhost.png)
 6. Verify the the fake REST API is working by going to http://localhost:3000/neighborhoods
 <!-- TODO: add image of API endpoint when this demo works-->
 <!-- ![json server enspoint](../screenshots/json-server-endpoint.png) -->
-
 
 ### Integrate the API with a Leaflet Map.
 1. Model the data structure for additional type safety.
@@ -90,7 +88,6 @@ $ touch src/app/models/neighborhood.ts
 ```typescript
 // TODO: add final interface here
 ```
-
 2. Install packages to implement [NgRx Data](https://ngrx.io/guide/data) to abstract CRUD operations in the app state.
 >    Yes, this is overkill, but this tutorial is a demo for NgRx Data.
 ```
@@ -126,9 +123,22 @@ $ ng add @ngrx/store@latest
     ...
 })
 ```
-
 4. Generate a component to display our map.
-4. Generate a service to GET the API data
-5. Verify we can GET API data.
-6. Implement [leafletjs](https://leafletjs.com/index.html) for Angular.
-7. Plot the markers with popups.
+```
+$ ng generate component map
+CREATE src/app/map/map.component.scss (0 bytes)
+CREATE src/app/map/map.component.html (18 bytes)
+CREATE src/app/map/map.component.spec.ts (605 bytes)
+CREATE src/app/map/map.component.ts (264 bytes)
+UPDATE src/app/app.module.ts (837 bytes)
+```
+```html
+<!-- src/app/app.component.html -->
+<h1>Leaflet / NgRx Data demo</h1>
+<app-map></app-map>
+```
+![map component works](./screenshots/)
+5. Generate a service to GET the API data
+6. Verify we can GET API data.
+7. Implement [leafletjs](https://leafletjs.com/index.html) for Angular.
+8. Plot the markers with popups.

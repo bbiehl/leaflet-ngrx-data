@@ -7,10 +7,12 @@ import { StoreModule } from '@ngrx/store';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { entityConfig } from './entity-metadata';
+import { MapComponent } from './map/map.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MapComponent
   ],
   imports: [
     AppRoutingModule,

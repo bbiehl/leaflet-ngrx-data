@@ -91,10 +91,43 @@ $ touch src/app/models/neighborhood.ts
 // TODO: add final interface here
 ```
 
-2. Install packages for [NgRx Data](https://ngrx.io/guide/data) to abstract CRUD operations in the app state.
+2. Install packages to implement [NgRx Data](https://ngrx.io/guide/data) to abstract CRUD operations in the app state.
 >    Yes, this is overkill, but this tutorial is a demo for NgRx Data.
+```
+$ ng add @ngrx/data@latest
+$ ng add @ngrx/effects@latest
+$ ng add @ngrx/entity@latest
+$ ng add @ngrx/store@latest
+```
+* *Note 1*: Notice this creates `src/app/entity-metadata.ts`
+* *Note 2*: `src/app/app.module.ts` imports are updated...
+```typescript
+@NgModule({
+    ...
+    imports: [
+        ...
+        EffectsModule.forRoot([]),
+        EntityDataModule.forRoot(entityConfig),
+        StoreModule.forRoot({}, {}),
+        ...
+    ],
+    ...
+})
+```
+3. Add `HttpClientModule` to `src/app/app.module.ts` imports to avoid a `NullInjectorError`.
+```typescript
+@NgModule({
+    ...
+    imports: [
+        ...
+        HttpClientModule,
+        ...
+    ],
+    ...
+})
+```
 
-3. Generate a component to display our map.
+4. Generate a component to display our map.
 4. Generate a service to GET the API data
 5. Verify we can GET API data.
 6. Implement [leafletjs](https://leafletjs.com/index.html) for Angular.

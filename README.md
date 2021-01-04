@@ -41,6 +41,7 @@ At the time of this writing I am using the following...
 1. Node v14.15.3
 2. NPM 6.14.9
 3. Angular CLI: 11.0.5
+
    ![versions](./screenshots/versions.png)
 
 ### Create a new Angular project
@@ -81,8 +82,60 @@ $ touch db.json
 ```
 
 3. Add some fake data.
-<!-- TODO: c/p the final db.json here -->
-4. Run the fake-api
+
+```json
+{
+  "neighborhoods": [
+    {
+      "id": 1,
+      "name": "Little Bohemia",
+      "url": "https://en.wikipedia.org/wiki/Little_Bohemia_(Omaha,_Nebraska)",
+      "description": "Tempor officia amet dolore et laboris proident.",
+      "imgUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f5/PragueHotelOmaha.JPG",
+      "lat": 41.245556,
+      "lng": -95.933333
+    },
+    {
+      "id": 2,
+      "name": "Dundee",
+      "url": "https://en.wikipedia.org/wiki/Dundee%E2%80%93Happy_Hollow_Historic_District",
+      "description": "Commodo amet duis occaecat eu do in culpa mollit commodo excepteur aute nostrud ullamco ipsum.",
+      "imgUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Dundee_HD_Omaha_NE.JPG/320px-Dundee_HD_Omaha_NE.JPG",
+      "lat": 41.265034,
+      "lng": -95.99038
+    },
+    {
+      "id": 3,
+      "name": "Little Italy",
+      "url": "https://en.wikipedia.org/wiki/Little_Italy,_Omaha",
+      "description": "Cillum enim officia laboris laborum minim voluptate veniam sit sunt cupidatat consectetur elit.",
+      "imgUrl": "https://upload.wikimedia.org/wikipedia/commons/0/09/Joel_N._Cornish_House.jpg",
+      "lat": 41.245278,
+      "lng": -95.921944
+    },
+    {
+      "id": 4,
+      "name": "Benson",
+      "url": "https://en.wikipedia.org/wiki/Benson,_Nebraska",
+      "description": "Laborum aliqua reprehenderit nostrud ad magna fugiat non sint sint duis.",
+      "imgUrl": "https://upload.wikimedia.org/wikipedia/commons/e/ef/Omaha%2C_Nebraska_Maple_Street_N_side_from_60_St-Ave_1.JPG",
+      "lat": 41.285,
+      "lng": -96.009444
+    },
+    {
+      "id": 5,
+      "name": "Field Club",
+      "url": "https://en.wikipedia.org/wiki/Field_Club_(Omaha,_Nebraska)",
+      "description": "Veniam non quis proident laborum do cupidatat nostrud eu nisi culpa.",
+      "imgUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Omaha%2C_Nebraska_Woolworth_Ave_x_36_St_NE_corner.JPG/640px-Omaha%2C_Nebraska_Woolworth_Ave_x_36_St_NE_corner.JPG",
+      "lat": 41.245278,
+      "lng": -95.963889
+    }
+  ]
+}
+```
+
+4. Run the fake-api.
 
 ```
 $ json-server db.json
@@ -92,8 +145,7 @@ $ json-server db.json
    ![json server running](./screenshots/json-server-running.png)
    ![json server localhost](./screenshots/json-server-localhost.png)
 6. Verify the the fake REST API is working by going to http://localhost:3000/neighborhoods
-   <!-- TODO: add image of API endpoint when this demo works-->
-   <!-- ![json server enspoint](../screenshots/json-server-endpoint.png) -->
+   ![json server endpoint](../screenshots/neighborhoods-api.png)
 
 ### Integrate the API with a Leaflet Map.
 
@@ -105,7 +157,15 @@ $ touch src/app/models/neighborhood.ts
 ```
 
 ```typescript
-// TODO: add final interface here
+export interface Neighborhood {
+    id: number;
+    name: string;
+    url: string;
+    description: string;
+    imgUrl: string;
+    lat: number;
+    lng: number;
+}
 ```
 
 2. Install packages to implement [NgRx Data](https://ngrx.io/guide/data) to abstract CRUD operations in the app state.
@@ -179,7 +239,7 @@ CREATE src/app/neighborhoods.service.ts (142 bytes)
 ```typescript
 // src/app/app.module.ts
 const defaultDataServiceConfig: DefaultDataServiceConfig = {
-  root: "http://localhost:3000/",
+    root: "http://localhost:3000/",
 };
 ```
 
@@ -232,15 +292,15 @@ export class MapComponent implements AfterViewInit {
 ```css
 /* src/app/map/map.component.scss */
 img {
-  height: 100px;
-  width: 100px;
+    height: 100px;
+    width: 100px;
 }
 ```
 
 ```html
 <!-- src/app/map/map.component.html -->
 <div *ngIf="isLoading$ | async; else elseTemplate">
-  <h1>Fetching neighborhoods...</h1>
+    <h1>Fetching neighborhoods...</h1>
 </div>
 
 <pre *ngIf="errors$ | async">
@@ -248,14 +308,14 @@ img {
 </pre>
 
 <ng-template #elseTemplate>
-  <!-- <pre>{{ neighborhoods$ | async | json }}</pre> -->
-  <div *ngFor="let neighborhood of (neighborhoods$ | async)">
-    <h3>{{ neighborhood.name }}</h3>
-    <img
-      src="{{ neighborhood.imgUrl }}"
-      alt="Image of {{ neighborhood.name }}"
-    />
-  </div>
+    <!-- <pre>{{ neighborhoods$ | async | json }}</pre> -->
+    <div *ngFor="let neighborhood of (neighborhoods$ | async)">
+        <h3>{{ neighborhood.name }}</h3>
+        <img
+        src="{{ neighborhood.imgUrl }}"
+        alt="Image of {{ neighborhood.name }}"
+        />
+    </div>
 </ng-template>
 ```
 

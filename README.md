@@ -59,7 +59,10 @@ $ npm run start
 ```
 
 3. Verify it is working by going to http://localhost:4200/
-   ![Welcome to Angular](./screenshots/welcome-to-angular.png)
+   ![Welcome to Angular](./screenshots/welcome-to-angular.png){
+   width:150px;
+   height:150px;
+   }
 
 ### Set up a fake REST API
 

@@ -145,7 +145,7 @@ $ json-server db.json
    ![json server running](./screenshots/json-server-running.png)
    ![json server localhost](./screenshots/json-server-localhost.png)
 6. Verify the the fake REST API is working by going to http://localhost:3000/neighborhoods
-   ![json server endpoint](../screenshots/neighborhoods-api.png)
+   ![json server endpoint](./screenshots/neighborhoods-api.png)
 
 ### Integrate the API with a Leaflet Map.
 

@@ -41,7 +41,7 @@ At the time of this writing I am using the following...
 1. Node v14.15.3
 2. NPM 6.14.9
 3. Angular CLI: 11.0.5
-   ![versions](./screenshots/versions.png)
+   ![versions](./screenshots/versions.png | height = 200px )
 
 ### Create a new Angular project
 

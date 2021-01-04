@@ -231,9 +231,11 @@ UPDATE src/app/app.module.ts (837 bytes)
 5. Setup a service to GET the API data.
 
 ```
+$ mkdir src/app/services
+$ cd src/app/services
 $ ng generate service neighborhoods
-CREATE src/app/neighborhoods.service.spec.ts (392 bytes)
-CREATE src/app/neighborhoods.service.ts (142 bytes)
+CREATE src/app/services/neighborhoods.service.spec.ts (392 bytes)
+CREATE src/app/services/neighborhoods.service.ts (142 bytes)
 ```
 
 6. Add a `defaultDataServiceConfig` below the imports.

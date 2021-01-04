@@ -158,13 +158,13 @@ $ touch src/app/models/neighborhood.ts
 
 ```typescript
 export interface Neighborhood {
-    id: number;
-    name: string;
-    url: string;
-    description: string;
-    imgUrl: string;
-    lat: number;
-    lng: number;
+  id: number;
+  name: string;
+  url: string;
+  description: string;
+  imgUrl: string;
+  lat: number;
+  lng: number;
 }
 ```
 
@@ -226,7 +226,9 @@ UPDATE src/app/app.module.ts (837 bytes)
 <app-map></app-map>
 ```
 
-![map component works](./screenshots/) 5. Setup a service to GET the API data.
+![map component works](./screenshots/map-component-works.png)
+
+5. Setup a service to GET the API data.
 
 ```
 $ ng generate service neighborhoods
@@ -239,7 +241,7 @@ CREATE src/app/neighborhoods.service.ts (142 bytes)
 ```typescript
 // src/app/app.module.ts
 const defaultDataServiceConfig: DefaultDataServiceConfig = {
-    root: "http://localhost:3000/",
+  root: "http://localhost:3000/",
 };
 ```
 
@@ -292,15 +294,15 @@ export class MapComponent implements AfterViewInit {
 ```css
 /* src/app/map/map.component.scss */
 img {
-    height: 100px;
-    width: 100px;
+  height: 100px;
+  width: 100px;
 }
 ```
 
 ```html
 <!-- src/app/map/map.component.html -->
 <div *ngIf="isLoading$ | async; else elseTemplate">
-    <h1>Fetching neighborhoods...</h1>
+  <h1>Fetching neighborhoods...</h1>
 </div>
 
 <pre *ngIf="errors$ | async">
@@ -308,14 +310,14 @@ img {
 </pre>
 
 <ng-template #elseTemplate>
-    <!-- <pre>{{ neighborhoods$ | async | json }}</pre> -->
-    <div *ngFor="let neighborhood of (neighborhoods$ | async)">
-        <h3>{{ neighborhood.name }}</h3>
-        <img
-        src="{{ neighborhood.imgUrl }}"
-        alt="Image of {{ neighborhood.name }}"
-        />
-    </div>
+  <!-- <pre>{{ neighborhoods$ | async | json }}</pre> -->
+  <div *ngFor="let neighborhood of (neighborhoods$ | async)">
+    <h3>{{ neighborhood.name }}</h3>
+    <img
+      src="{{ neighborhood.imgUrl }}"
+      alt="Image of {{ neighborhood.name }}"
+    />
+  </div>
 </ng-template>
 ```
 

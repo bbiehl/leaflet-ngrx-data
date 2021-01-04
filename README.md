@@ -42,7 +42,6 @@ At the time of this writing I am using the following...
 2. NPM 6.14.9
 3. Angular CLI: 11.0.5
    ![versions](./screenshots/versions.png)
-   {: height="200px" width="200px"}
 
 ### Create a new Angular project
 
@@ -60,7 +59,7 @@ $ npm run start
 ```
 
 3. Verify it is working by going to http://localhost:4200/
-   ![Welcome to Angular](./screenshots/welcome-to-angular.png =400x400)
+   ![Welcome to Angular](./screenshots/welcome-to-angular.png)
 
 ### Set up a fake REST API
 

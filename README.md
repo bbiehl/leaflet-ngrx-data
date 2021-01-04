@@ -259,7 +259,7 @@ img {
 </ng-template>
 ```
 
-![Getting API data](./screenshots/connected.png)
+![Getting API data](./screenshots/connected-api.png)
 
 11. Implement [leafletjs](https://leafletjs.com/index.html) for Angular.
 12. Plot the markers with popups.

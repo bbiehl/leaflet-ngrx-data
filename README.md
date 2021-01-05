@@ -277,7 +277,6 @@ export class NeighborhoodsService extends EntityCollectionServiceBase<Neighborho
 ```typescript
 // src/app/map/map.component.ts
 export class MapComponent implements AfterViewInit {
-    ...
     public isLoading$: Observable<boolean>;
     public errors$: Observable<any>;
     public neighborhoods$: Observable<Neighborhood[]>;
@@ -285,8 +284,16 @@ export class MapComponent implements AfterViewInit {
     constructor(private neighbohoodsService: NeighborhoodsService ) {
         this.isLoading$ = this.neighbohoodsService.loading$;
         this.errors$ = this.neighbohoodsService.errors$;
-        this.neighborhoods$ = this.neighbohoodsService.getAll();
+        this.neighborhoods$ = this.neighbohoodsService.entities$;
     }
+
+    ngOnInit(): void {
+        this.getNeighborhoods();
+    }
+
+    public getNeighborhoods() {
+        this.neighbohoodsService.getAll();
+    };
     ...
 }
 ```

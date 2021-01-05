@@ -332,5 +332,8 @@ img {
 
 ![Getting API data](./screenshots/connected-api.png)
 
-11. Implement [leafletjs](https://leafletjs.com/index.html) for Angular.
-12. Plot the markers with popups.
+11. Install packages for [leafletjs](https://leafletjs.com/index.html) for Angular.
+```
+$ npm install leaflet
+$ npm install --save-dev @types/leaflet
+```

@@ -1,0 +1,16 @@
+<div *ngIf="isLoading; else elseTemplate">
+    <!-- TODO: add Angular Material Spinner Component -->
+    <h1>Fetching neighborhoods...</h1>
+</div>
+
+<pre *ngIf="errors">
+    <!-- TODO: add "Oops, Something Went Wrong" component -->
+    {{ errors}}
+</pre>
+
+<ng-template #elseTemplate>
+    <div *ngFor="let neighborhood of neighborhoods">
+        <h3>{{ neighborhood.name }}</h3>
+        <img src="{{ neighborhood.imgUrl }}" alt="Image of {{ neighborhood.name }}">
+    </div>
+</ng-template>

@@ -1,0 +1,8 @@
+<div class="neighborhoods-container">
+  <div id="neighboods-list" class="neighborhoods-item">
+    <app-list [isLoading]="isLoading$ | async" [errors]="errors$ | async" [neighborhoods]="neighborhoods$ | async"></app-list>
+  </div>
+  <div id="neighboods-list" class="neighborhoods-item">
+    <app-map></app-map>
+  </div>
+</div>

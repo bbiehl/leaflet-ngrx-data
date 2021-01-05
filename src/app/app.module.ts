@@ -8,13 +8,15 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { entityConfig } from './entity-metadata';
 import { MapComponent } from './map/map.component';
+import { NeighborhoodsComponent } from './neighborhoods/neighborhoods.component';
+import { ListComponent } from './list/list.component';
 
 const defaultDataServiceConfig: DefaultDataServiceConfig = {
   root: 'http://localhost:3000/',
 };
 
 @NgModule({
-    declarations: [AppComponent, MapComponent],
+    declarations: [AppComponent, MapComponent, NeighborhoodsComponent, ListComponent],
     imports: [
         AppRoutingModule,
         BrowserModule,

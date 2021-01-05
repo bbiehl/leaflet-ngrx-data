@@ -333,7 +333,10 @@ img {
 ![Getting API data](./screenshots/connected-api.png)
 
 11. Install packages for [leafletjs](https://leafletjs.com/index.html) for Angular.
+
 ```
 $ npm install leaflet
 $ npm install --save-dev @types/leaflet
 ```
+
+12. Generate a basic map and tile layer.

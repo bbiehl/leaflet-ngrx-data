@@ -7,6 +7,6 @@ import { Neighborhood } from '../models/neighborhood';
 })
 export class NeighborhoodsService extends EntityCollectionServiceBase<Neighborhood> {
     constructor(serviceElementsFactory: EntityCollectionServiceElementsFactory) {
-        super('Neighborhood', serviceElementsFactory);
+        super('neighborhood', serviceElementsFactory);
   }
 }

@@ -12,11 +12,16 @@ import { NeighborhoodsComponent } from './neighborhoods/neighborhoods.component'
 import { ListComponent } from './list/list.component';
 
 const defaultDataServiceConfig: DefaultDataServiceConfig = {
-  root: 'http://localhost:3000/',
+    root: 'http://localhost:3000/',
 };
 
 @NgModule({
-    declarations: [AppComponent, MapComponent, NeighborhoodsComponent, ListComponent],
+    declarations: [
+        AppComponent,
+        MapComponent,
+        NeighborhoodsComponent,
+        ListComponent,
+    ],
     imports: [
         AppRoutingModule,
         BrowserModule,
@@ -24,9 +29,12 @@ const defaultDataServiceConfig: DefaultDataServiceConfig = {
         EntityDataModule.forRoot(entityConfig),
         HttpClientModule,
         StoreModule.forRoot({}, {}),
-  ],
+    ],
     providers: [
-        { provide: DefaultDataServiceConfig, useValue: defaultDataServiceConfig },
+        {
+            provide: DefaultDataServiceConfig,
+            useValue: defaultDataServiceConfig,
+        },
     ],
     bootstrap: [AppComponent],
 })

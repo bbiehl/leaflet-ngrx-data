@@ -4,9 +4,9 @@ import { Neighborhood } from '../models/neighborhood';
 import { NeighborhoodsService } from '../services/neighborhoods.service';
 
 @Component({
-  selector: 'app-neighborhoods',
-  templateUrl: './neighborhoods.component.html',
-  styleUrls: ['./neighborhoods.component.scss']
+    selector: 'app-neighborhoods',
+    templateUrl: './neighborhoods.component.html',
+    styleUrls: ['./neighborhoods.component.scss']
 })
 export class NeighborhoodsComponent implements OnInit {
     public isLoading$: Observable<boolean>;
@@ -26,5 +26,4 @@ export class NeighborhoodsComponent implements OnInit {
     private getNeighborhoods(): void {
         this.neighbohoodsService.getAll();
     }
-
 }

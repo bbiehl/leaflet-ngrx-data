@@ -2,3 +2,14 @@ img {
   height: 100px;
   width: 100px;
 }
+
+.list-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+// .list-item {
+//   width: 150px;
+// }

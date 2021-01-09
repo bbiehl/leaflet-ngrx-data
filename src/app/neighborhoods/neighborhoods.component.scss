@@ -1,8 +1,8 @@
 .neighborhoods-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 
 .neighborhoods-item {
-    width: 50%;
+    height: 300px;
 }

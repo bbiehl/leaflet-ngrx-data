@@ -19,11 +19,17 @@ export class MapComponent implements AfterViewInit {
     }
 
     private createMap(): void {
-        this.leafletMap = new LeafletMap('leafletMapId').setView([41.2, -95.95], 9);
-        this.tiles = new TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        this.leafletMap = new LeafletMap('leafletMapId', {
+            center: {
+                lat: 41.2,
+                lng: -95.95
+            },
             maxZoom: 17,
             minZoom: 6,
+            zoom: 9,
+        });
+        this.tiles = new TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
         }).addTo(this.leafletMap);
     }
 }

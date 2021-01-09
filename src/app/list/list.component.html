@@ -8,9 +8,11 @@
     {{ errors}}
 </pre>
 
-<ng-template #elseTemplate>
-    <div *ngFor="let neighborhood of neighborhoods">
-        <p>{{ neighborhood.name }}</p>
-        <img src="{{ neighborhood.imgUrl }}" alt="Image of {{ neighborhood.name }}">
+<ng-template #elseTemplate >
+    <div class="list-container">
+        <div *ngFor="let neighborhood of neighborhoods">
+            <p>{{ neighborhood.name }}</p>
+            <img src="{{ neighborhood.imgUrl }}" alt="Image of {{ neighborhood.name }}">
+        </div>
     </div>
 </ng-template>

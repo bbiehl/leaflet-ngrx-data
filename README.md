@@ -390,3 +390,7 @@ export class MapComponent implements AfterViewInit {
     }
 }
 ```
+
+13. Set up a Marker Service.
+
+14. Add Marker Service to Map.

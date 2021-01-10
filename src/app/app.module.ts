@@ -13,6 +13,7 @@ import { ListComponent } from './list/list.component';
 
 const defaultDataServiceConfig: DefaultDataServiceConfig = {
     root: 'http://localhost:3000/',
+    getDelay: 3000,
 };
 
 @NgModule({

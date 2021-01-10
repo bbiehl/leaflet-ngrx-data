@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LayerGroup, Map as LeafletMap, Marker } from 'leaflet';
+import { Icon, Map as LeafletMap, Marker } from 'leaflet';
 import { Observable } from 'rxjs';
 import { Neighborhood } from '../models/neighborhood';
 import { NeighborhoodsService } from './neighborhoods.service';
@@ -8,7 +8,19 @@ import { NeighborhoodsService } from './neighborhoods.service';
     providedIn: 'root',
 })
 export class MarkerService {
-    public neighborhoods$: Observable<Neighborhood[]>;
+    private readonly neighborhoods$: Observable<Neighborhood[]>;
+    private readonly icon = new Icon({
+        iconUrl:
+            'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
+        iconRetinaUrl:
+            'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowUrl:
+            'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+        shadowSize: [41, 41],
+    });
 
     constructor(private neighbohoodsService: NeighborhoodsService) {
         this.neighborhoods$ = this.neighbohoodsService.entities$;
@@ -19,12 +31,14 @@ export class MarkerService {
             for (const n of neighborhoods) {
                 const lat = n.lat;
                 const lng = n.lng;
-                const marker = new Marker([lat, lng]).addTo(map);
+                const marker = new Marker([lat, lng], {
+                    icon: this.icon,
+                }).addTo(map);
                 marker.bindPopup(
                     `<div class="popup">
                         <h3>${n.name}</h3>
-                        <img style="max-width: -webkit-fill-available;" src="${n.imgUrl}" />
-                        <p>${n.description}</p>
+                        <img style="max-width: -webkit-fill-available;" src="${n.imgUrl}"/>
+                        <a href="${n.url}">wikipedia</p>
                     </div>`
                 );
             }

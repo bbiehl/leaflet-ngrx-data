@@ -9,12 +9,13 @@ import { MarkerService } from '../services/marker.service';
 })
 export class MapComponent implements AfterViewInit {
     public leafletMap!: LeafletMap;
-    public tiles!: TileLayer;
     private readonly openStreetMapUrl =
         'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
     private readonly openStreetMapAttribution =
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
-
+    public tiles = new TileLayer(this.openStreetMapUrl, {
+        attribution: this.openStreetMapAttribution,
+    });
 
     constructor(private markerService: MarkerService) {}
 
@@ -29,12 +30,10 @@ export class MapComponent implements AfterViewInit {
                 lat: 41.2635,
                 lng: -95.9527,
             },
+            layers: [this.tiles],
             maxZoom: 17,
             minZoom: 6,
             zoom: 12,
         });
-        this.tiles = new TileLayer(this.openStreetMapUrl, {
-            attribution: this.openStreetMapAttribution,
-        }).addTo(this.leafletMap);
     }
 }

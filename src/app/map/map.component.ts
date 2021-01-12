@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { Map as LeafletMap, TileLayer } from 'leaflet';
 import { MarkerService } from '../services/marker.service';
 

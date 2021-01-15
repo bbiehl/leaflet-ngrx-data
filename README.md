@@ -28,7 +28,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ---
 
-## Steps to set up on your own via the Angular CLI
+## Tutorial
 
 > This tutorial assumes you already have installed the following...
 
@@ -46,7 +46,7 @@ At the time of this writing I am using the following...
 
 ### Create a new Angular project
 
-![Intro Image](/assets/images/leaflet-ngrx-data/intro.png)
+![Intro Image](./screenshots/leaflet-ngrx-data/intro.png)
 
 > This is one of many ways to display a Leaflet Map in Angular, leverage @types/leaflet, and manage API data state via @ngrx/data.
 
@@ -62,7 +62,7 @@ At the time of this writing I am using the following...
 -   NPM 6.14.9
 -   Angular CLI: 11.0.5
 
-    ![versions](/assets/images/leaflet-ngrx-data/versions.png)
+    ![versions](./screenshots/leaflet-ngrx-data/versions.png)
 
 **Note:** I will be using the `$` symbol in command line instructions to denote the beggining of a new command.
 
@@ -150,13 +150,13 @@ At the time of this writing I am using the following...
 
 5. Verify JSON Server is working **http://localhost:3000**
 
-    ![json server running](/assets/images/leaflet-ngrx-data/json-server-running.png)
+    ![json server running](./screenshots/leaflet-ngrx-data/json-server-running.png)
 
-    ![json server localhost](/assets/images/leaflet-ngrx-data/json-server-localhost.png)
+    ![json server localhost](./screenshots/leaflet-ngrx-data/json-server-localhost.png)
 
 6. Verify the the fake REST API is working by going to **http://localhost:3000/neighborhoods**
 
-    ![json server endpoint](/assets/images/leaflet-ngrx-data/neighborhoods-api.png)
+    ![json server endpoint](./screenshots/leaflet-ngrx-data/neighborhoods-api.png)
 
 7. Now that a fake API exists, create a new angular project.
 
@@ -174,7 +174,7 @@ At the time of this writing I am using the following...
     ```
 
 9. Verify the app is working by going to **http://localhost:4200/**
-   ![Welcome to Angular](/assets/images/leaflet-ngrx-data/welcome-to-angular.png)
+   ![Welcome to Angular](./screenshots/leaflet-ngrx-data/welcome-to-angular.png)
 
 10. Generate a model to provide additional type safety.
 
@@ -279,7 +279,7 @@ At the time of this writing I am using the following...
     }
     ```
 
-    ![compoents work](/assets/images/leaflet-ngrx-data/components-work.png)
+    ![compoents work](./screenshots/leaflet-ngrx-data/components-work.png)
 
 14. Setup a service to GET the API data.
 
@@ -425,7 +425,7 @@ At the time of this writing I am using the following...
     }
     ```
 
-    ![list implemented](/assets/images/leaflet-ngrx-data/list-implemented.png)
+    ![list implemented](./screenshots/leaflet-ngrx-data/list-implemented.png)
 
 20. Install package [leafletjs](https://leafletjs.com/index.html) packages for Angular.
 

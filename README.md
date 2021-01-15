@@ -42,355 +42,454 @@ At the time of this writing I am using the following...
 2. NPM 6.14.9
 3. Angular CLI: 11.0.5
 
-   ![versions](./screenshots/versions.png)
+    ![versions](./screenshots/versions.png)
 
 ### Create a new Angular project
 
-1. Create new angular project. (I chose strict type checking, add routing, and SCSS)
+![Intro Image](/assets/images/leaflet-ngrx-data/intro.png)
 
-```
-$ ng new leaflet-ngrx-data
-$ cd leaflet-ngrx-data
-```
+> This is one of many ways to display a Leaflet Map in Angular, leverage @types/leaflet, and manage API data state via @ngrx/data.
 
-2. Start it up.
+This tutorial assumes you already have installed the following...
 
-```
-$ npm run start
-```
+-   [nodejs](https://nodejs.org/en/)
+-   [node packge manager](https://www.npmjs.com/get-npm)
+-   [Angular CLI](https://angular.io/cli)
 
-3. Verify it is working by going to http://localhost:4200/
-   ![Welcome to Angular](./screenshots/welcome-to-angular.png)
+At the time of this writing I am using the following...
 
-### Set up a fake REST API
+-   Node v14.15.3
+-   NPM 6.14.9
+-   Angular CLI: 11.0.5
 
-1. Install [JSON Server](https://www.npmjs.com/package/json-server).
-   > In this case I have installed json-server globally, but you don't necessarily have to do that.
-   > Since this repo is not meant for production, I have included the fake-api in the repo.
-   > Ultimately, the goal is to rapidly demonstrate proof-of-concept.
+    ![versions](/assets/images/leaflet-ngrx-data/versions.png)
 
-```
-$ npm install -g json-server
-$ mkdir fake-api
-```
+**Note:** I will be using the `$` symbol in command line instructions to denote the beggining of a new command.
+
+---
+
+1. Set up a fake REST API using [JSON Server](https://www.npmjs.com/package/json-server)
+
+    > In this case I have installed json-server globally, but you don't necessarily have to do that.
+
+    > Ultimately, the goal is to rapidly demonstrate proof-of-concept.
+
+    ```text
+    $ npm install -g json-server
+    $ mkdir fake-api
+    ```
 
 2. Create a json file.
 
-```
-$ cd fake-api
-$ touch db.json
-```
+    ```text
+    $ cd fake-api
+    $ touch db.json
+    ```
 
-3. Add some fake data.
+3. Add some fake data as it might be rendered from a database table to an API endpoint.
 
-```json
-{
-  "neighborhoods": [
+    > In this example our database table will be `Neighborhoods`
+
+    ```json
     {
-      "id": 1,
-      "name": "Little Bohemia",
-      "url": "https://en.wikipedia.org/wiki/Little_Bohemia_(Omaha,_Nebraska)",
-      "description": "Tempor officia amet dolore et laboris proident.",
-      "imgUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f5/PragueHotelOmaha.JPG",
-      "lat": 41.245556,
-      "lng": -95.933333
-    },
-    {
-      "id": 2,
-      "name": "Dundee",
-      "url": "https://en.wikipedia.org/wiki/Dundee%E2%80%93Happy_Hollow_Historic_District",
-      "description": "Commodo amet duis occaecat eu do in culpa mollit commodo excepteur aute nostrud ullamco ipsum.",
-      "imgUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Dundee_HD_Omaha_NE.JPG/320px-Dundee_HD_Omaha_NE.JPG",
-      "lat": 41.265034,
-      "lng": -95.99038
-    },
-    {
-      "id": 3,
-      "name": "Little Italy",
-      "url": "https://en.wikipedia.org/wiki/Little_Italy,_Omaha",
-      "description": "Cillum enim officia laboris laborum minim voluptate veniam sit sunt cupidatat consectetur elit.",
-      "imgUrl": "https://upload.wikimedia.org/wikipedia/commons/0/09/Joel_N._Cornish_House.jpg",
-      "lat": 41.245278,
-      "lng": -95.921944
-    },
-    {
-      "id": 4,
-      "name": "Benson",
-      "url": "https://en.wikipedia.org/wiki/Benson,_Nebraska",
-      "description": "Laborum aliqua reprehenderit nostrud ad magna fugiat non sint sint duis.",
-      "imgUrl": "https://upload.wikimedia.org/wikipedia/commons/e/ef/Omaha%2C_Nebraska_Maple_Street_N_side_from_60_St-Ave_1.JPG",
-      "lat": 41.285,
-      "lng": -96.009444
-    },
-    {
-      "id": 5,
-      "name": "Field Club",
-      "url": "https://en.wikipedia.org/wiki/Field_Club_(Omaha,_Nebraska)",
-      "description": "Veniam non quis proident laborum do cupidatat nostrud eu nisi culpa.",
-      "imgUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Omaha%2C_Nebraska_Woolworth_Ave_x_36_St_NE_corner.JPG/640px-Omaha%2C_Nebraska_Woolworth_Ave_x_36_St_NE_corner.JPG",
-      "lat": 41.245278,
-      "lng": -95.963889
+        "neighborhoods": [
+            {
+                "id": 1,
+                "name": "Little Bohemia",
+                "url": "https://en.wikipedia.org/wiki/Little_Bohemia_(Omaha,_Nebraska)",
+                "description": "Tempor officia amet dolore et laboris proident.",
+                "imgUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f5/PragueHotelOmaha.JPG",
+                "lat": 41.245556,
+                "lng": -95.933333
+            },
+            {
+                "id": 2,
+                "name": "Dundee",
+                "url": "https://en.wikipedia.org/wiki/Dundee%E2%80%93Happy_Hollow_Historic_District",
+                "description": "Commodo amet duis occaecat eu do in culpa mollit commodo excepteur aute nostrud ullamco ipsum.",
+                "imgUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Dundee_HD_Omaha_NE.JPG/320px-Dundee_HD_Omaha_NE.JPG",
+                "lat": 41.265034,
+                "lng": -95.99038
+            },
+            {
+                "id": 3,
+                "name": "Little Italy",
+                "url": "https://en.wikipedia.org/wiki/Little_Italy,_Omaha",
+                "description": "Cillum enim officia laboris laborum minim voluptate veniam sit sunt cupidatat consectetur elit.",
+                "imgUrl": "https://upload.wikimedia.org/wikipedia/commons/0/09/Joel_N._Cornish_House.jpg",
+                "lat": 41.245278,
+                "lng": -95.921944
+            },
+            {
+                "id": 4,
+                "name": "Benson",
+                "url": "https://en.wikipedia.org/wiki/Benson,_Nebraska",
+                "description": "Laborum aliqua reprehenderit nostrud ad magna fugiat non sint sint duis.",
+                "imgUrl": "https://upload.wikimedia.org/wikipedia/commons/e/ef/Omaha%2C_Nebraska_Maple_Street_N_side_from_60_St-Ave_1.JPG",
+                "lat": 41.285,
+                "lng": -96.009444
+            },
+            {
+                "id": 5,
+                "name": "Field Club",
+                "url": "https://en.wikipedia.org/wiki/Field_Club_(Omaha,_Nebraska)",
+                "description": "Veniam non quis proident laborum do cupidatat nostrud eu nisi culpa.",
+                "imgUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Omaha%2C_Nebraska_Woolworth_Ave_x_36_St_NE_corner.JPG/640px-Omaha%2C_Nebraska_Woolworth_Ave_x_36_St_NE_corner.JPG",
+                "lat": 41.245278,
+                "lng": -95.963889
+            }
+        ]
     }
-  ]
-}
-```
+    ```
 
 4. Run the fake-api.
 
-```
-$ json-server db.json
-```
+    ```
+    $ json-server db.json
+    ```
 
-5. Verify JSON Server is working http://localhost:3000
-   ![json server running](./screenshots/json-server-running.png)
-   ![json server localhost](./screenshots/json-server-localhost.png)
-6. Verify the the fake REST API is working by going to http://localhost:3000/neighborhoods
-   ![json server endpoint](./screenshots/neighborhoods-api.png)
+5. Verify JSON Server is working **http://localhost:3000**
 
-### Integrate the API with a Leaflet Map.
+    ![json server running](/assets/images/leaflet-ngrx-data/json-server-running.png)
 
-1. Model the data structure for additional type safety.
+    ![json server localhost](/assets/images/leaflet-ngrx-data/json-server-localhost.png)
 
-```
-$ mkdir src/app/models
-$ touch src/app/models/neighborhood.ts
-```
+6. Verify the the fake REST API is working by going to **http://localhost:3000/neighborhoods**
 
-```typescript
-export interface Neighborhood {
-  id: number;
-  name: string;
-  url: string;
-  description: string;
-  imgUrl: string;
-  lat: number;
-  lng: number;
-}
-```
+    ![json server endpoint](/assets/images/leaflet-ngrx-data/neighborhoods-api.png)
 
-2. Install packages to implement [NgRx Data](https://ngrx.io/guide/data) to abstract CRUD operations in the app state.
-   > Yes, this is overkill, but this tutorial is a demo for NgRx Data.
+7. Now that a fake API exists, create a new angular project.
 
-```
-$ ng add @ngrx/data@latest
-$ ng add @ngrx/effects@latest
-$ ng add @ngrx/entity@latest
-$ ng add @ngrx/store@latest
-```
+    > This example uses strict type checking, routing (irrelevant for this demo), and SCSS. I also included tests (but tests are also irrelevant for this demo).
 
-- _Note 1_: Notice this creates `src/app/entity-metadata.ts`
-- _Note 2_: `src/app/app.module.ts` imports are updated...
+    ```
+    $ ng new leaflet-ngrx-data
+    $ cd leaflet-ngrx-data
+    ```
 
-```typescript
-@NgModule({
-    ...
-    imports: [
+8. Start it up.
+
+    ```
+    $ npm run start
+    ```
+
+9. Verify the app is working by going to **http://localhost:4200/**
+   ![Welcome to Angular](/assets/images/leaflet-ngrx-data/welcome-to-angular.png)
+
+10. Generate a model to provide additional type safety.
+
+    ```
+    $ mkdir src/app/models
+    $ touch src/app/models/neighborhood.ts
+    ```
+
+    ```typescript
+    // src/app/models/neighborhood.ts
+    export interface Neighborhood {
+        id: number;
+        name: string;
+        url: string;
+        description: string;
+        imgUrl: string;
+        lat: number;
+        lng: number;
+    }
+    ```
+
+11. Install packages to implement [NgRx Data](https://ngrx.io/guide/data) to abstract CRUD operations in the app state.
+
+    > Yes, this is overkill, but this tutorial is a demo for NgRx Data.
+
+    ```
+    $ ng add @ngrx/data@latest
+    $ ng add @ngrx/effects@latest
+    $ ng add @ngrx/entity@latest
+    $ ng add @ngrx/store@latest
+    ```
+
+    > This creates `src/app/entity-metadata.ts` and app level module imports are updated.
+
+    ```typescript
+    // src/app/app.module.ts
+    @NgModule({
         ...
-        EffectsModule.forRoot([]),
-        EntityDataModule.forRoot(entityConfig),
-        StoreModule.forRoot({}, {}),
+        imports: [
+            ...
+            EffectsModule.forRoot([]),
+            EntityDataModule.forRoot(entityConfig),
+            StoreModule.forRoot({}, {}),
+            ...
+        ],
         ...
-    ],
-    ...
-})
-```
+    })
+    ```
 
-3. Add `HttpClientModule` to `src/app/app.module.ts` imports to avoid a `NullInjectorError`.
+12. Import `HttpClientModule` to avoid a `NullInjectorError`.
 
-```typescript
-@NgModule({
-    ...
-    imports: [
+    ```typescript
+    // src/app/app.module.ts
+    @NgModule({
         ...
-        HttpClientModule,
+        imports: [
+            ...
+            HttpClientModule,
+            ...
+        ],
         ...
-    ],
-    ...
-})
-```
+    })
+    ```
 
-4. Generate a component to display our map.
+13. Generate a neighborhoods-component, list-component, and map-component.
 
-```
-$ ng generate component map
-CREATE src/app/map/map.component.scss (0 bytes)
-CREATE src/app/map/map.component.html (18 bytes)
-CREATE src/app/map/map.component.spec.ts (605 bytes)
-CREATE src/app/map/map.component.ts (264 bytes)
-UPDATE src/app/app.module.ts (837 bytes)
-```
+    > Component structure is ultimately up to the architect, this is one way to set it up.
 
-```html
-<!-- src/app/app.component.html -->
-<h1>Leaflet / NgRx Data demo</h1>
-<app-map></app-map>
-```
+    ```
+    $ ng generate component neighborhood
+    $ ng generate component list
+    $ ng generate component map
+    ```
 
-![map component works](./screenshots/map-component-works.png)
+    ```html
+    <!-- src/app/app.component.html -->
+    <h1>Leaflet / NgRx Data demo</h1>
+    <app-neighborhoods></app-neighborhoods>
+    ```
 
-5. Setup a service to GET the API data.
+    ```html
+    <!-- src/app/neighborhoods/neighborhoods.component.html -->
+    <div class="neighborhoods-container">
+        <div id="neighboods-list" class="neighborhoods-item">
+            <app-list></app-list>
+        </div>
+        <div id="neighboods-map" class="neighborhoods-item">
+            <app-map></app-map>
+        </div>
+    </div>
+    ```
 
-```
-$ mkdir src/app/services
-$ cd src/app/services
-$ ng generate service neighborhoods
-CREATE src/app/services/neighborhoods.service.spec.ts (392 bytes)
-CREATE src/app/services/neighborhoods.service.ts (142 bytes)
-```
-
-6. Add a `defaultDataServiceConfig` below the imports.
-
-```typescript
-// src/app/app.module.ts
-const defaultDataServiceConfig: DefaultDataServiceConfig = {
-  root: "http://localhost:3000/",
-};
-```
-
-7. Set up providers for the to use the `defaultDataServiceConfig`.
-
-```typescript
-// src/app/app.module.ts
-@NgModule({
-    ...
-    providers: [
-        { provide: DefaultDataServiceConfig, useValue: defaultDataServiceConfig },
-    ],
-    ...
-})
-```
-
-8. Extent `NeighborhoodsService` to use `serviceElementsFactory` and a `serviceElementsFactory` super call.
-
-```typescript
-// src/app/neighborhoods.service.ts
-...
-export class NeighborhoodsService extends EntityCollectionServiceBase<Neighborhood> {
-    constructor(serviceElementsFactory: EntityCollectionServiceElementsFactory) {
-        super('Neighborhood', serviceElementsFactory);
-  }
-}
-```
-
-9. Configure our Map Component to tell the Neighborhoods service to get the neighborhoods list and observe the neighborhoods list.
-
-```typescript
-// src/app/map/map.component.ts
-export class MapComponent implements AfterViewInit {
-    public isLoading$: Observable<boolean>;
-    public errors$: Observable<any>;
-    public neighborhoods$: Observable<Neighborhood[]>;
-
-    constructor(private neighbohoodsService: NeighborhoodsService ) {
-        this.isLoading$ = this.neighbohoodsService.loading$;
-        this.errors$ = this.neighbohoodsService.errors$;
-        this.neighborhoods$ = this.neighbohoodsService.entities$;
+    ```css
+    /* src/app/neighborhoods/neighborhoods.component.scss */
+    .neighborhoods-container {
+        display: flex;
+        flex-direction: column;
     }
 
-    ngOnInit(): void {
-        this.getNeighborhoods();
+    .neighborhoods-item {
+        height: 300px;
     }
+    ```
 
-    public getNeighborhoods() {
-        this.neighbohoodsService.getAll();
+    ![compoents work](/assets/images/leaflet-ngrx-data/components-work.png)
+
+14. Setup a service to GET the API data.
+
+    ```
+    $ mkdir src/app/services
+    $ cd src/app/services
+    $ ng generate service neighborhoods
+    ```
+
+15. Add a `defaultDataServiceConfig` below the imports.
+
+    > I added a three second delay to demonstrate asyncronous loading.
+
+    ```typescript
+    // src/app/app.module.ts
+    const defaultDataServiceConfig: DefaultDataServiceConfig = {
+        root: "http://localhost:3000/",
+        getDelay: 3000,
     };
+    ```
+
+16. Set up providers to use the `defaultDataServiceConfig`.
+
+    ```typescript
+    // src/app/app.module.ts
+    @NgModule({
+        ...
+        providers: [
+            { provide: DefaultDataServiceConfig, useValue: defaultDataServiceConfig },
+        ],
+        ...
+    })
+    ```
+
+17. Extent `NeighborhoodsService` to use `serviceElementsFactory` and a `serviceElementsFactory` super call.
+
+    ```typescript
+    // src/app/neighborhoods.service.ts
     ...
-}
-```
+    export class NeighborhoodsService extendsEntityCollectionServiceBase<Neighborhood> {
+        constructor(serviceElementsFactory: EntityCollectionServiceElementsFactory) {
+            super('neighborhood', serviceElementsFactory);
+        }
+    }
+    ```
 
-10. Verify we can GET API data.
+18. Configure our Neighborhoods Component.
 
-```css
-/* src/app/map/map.component.scss */
-img {
-  height: 100px;
-  width: 100px;
-}
-```
+    ```typescript
+    // src/app/neighborhoods/neighborhoods.component.ts
+    export class NeighborhoodsComponent implements OnInit {
+        public isLoading$: Observable<boolean>;
+        public errors$: Observable<any>;
+        public neighborhoods$: Observable<Neighborhood[]>;
 
-```html
-<!-- src/app/map/map.component.html -->
-<div *ngIf="isLoading$ | async; else elseTemplate">
-  <h1>Fetching neighborhoods...</h1>
-</div>
+        constructor(private neighbohoodsService: NeighborhoodsService) {
+            this.isLoading$ = this.neighbohoodsService.loading$;
+            this.errors$ = this.neighbohoodsService.errors$;
+            this.neighborhoods$ = this.neighbohoodsService.entities$;
+        }
 
-<pre *ngIf="errors$ | async">
-    {{ errors$ | async | json }}
-</pre>
+        ngOnInit(): void {
+            this.getNeighborhoods();
+        }
 
-<ng-template #elseTemplate>
-  <!-- <pre>{{ neighborhoods$ | async | json }}</pre> -->
-  <div *ngFor="let neighborhood of (neighborhoods$ | async)">
-    <h3>{{ neighborhood.name }}</h3>
-    <img
-      src="{{ neighborhood.imgUrl }}"
-      alt="Image of {{ neighborhood.name }}"
-    />
-  </div>
-</ng-template>
-```
+        private getNeighborhoods(): void {
+            this.neighbohoodsService.getAll();
+        }
+    }
+    ```
 
-![Getting API data](./screenshots/connected-api.png)
+19. Verify we are able to GET and display API data.
 
-11. Install packages for [leafletjs](https://leafletjs.com/index.html) for Angular.
+    > Pass asyncronous inputs to `app-list`.
 
-```
-$ npm install leaflet
-$ npm install --save-dev @types/leaflet
-```
+    ```html
+    <!-- src/app/neighborhoods/neighborhoods.component.html -->
+    <div class="neighborhoods-container">
+        <div id="neighboods-list" class="neighborhoods-item">
+            <app-list
+                [isLoading]="isLoading$ | async"
+                [errors]="errors$ | async"
+                [neighborhoods]="neighborhoods$ | async"
+            ></app-list>
+        </div>
+        <div id="neighboods-map" class="neighborhoods-item">
+            <app-map></app-map>
+        </div>
+    </div>
+    ```
 
-12. Generate a basic map and tile layer.
+    > Receive inputs in `app-list`
 
-```css
-/* src/styles.scss */
-@import "~leaflet/dist/leaflet.css";
-```
+    ```typescript
+    // src/app/list/list.component.ts
+    @Component({
+        selector: "app-list",
+        templateUrl: "./list.component.html",
+        styleUrls: ["./list.component.scss"],
+    })
+    export class ListComponent {
+        @Input() isLoading!: boolean | null;
+        @Input() errors!: any | null;
+        @Input() neighborhoods!: Neighborhood[] | null;
+    }
+    ```
 
-```css
-/* src/app/map/map.component.scss */
-.map {
-    height: 100%;
-}
-```
+    ```html
+    <!-- src/app/list/list.component.html -->
+    <div *ngIf="isLoading; else elseTemplate">
+        <h1>Fetching neighborhoods...</h1>
+    </div>
 
-```html
-<!-- src/app/map/map.component.html -->
-<div id="leafletMapId" class="map"></div>
-```
+    <pre *ngIf="errors">
+        {{ errors}}
+    </pre>
 
-```typescript
-// src/app/map/map.component.ts
-import { AfterViewInit, Component, Input } from '@angular/core';
-import { Map as LeafletMap, TileLayer } from 'leaflet';
-import { Neighborhood } from '../models/neighborhood';
+    <ng-template #elseTemplate>
+        <div class="list-container">
+            <div *ngFor="let neighborhood of neighborhoods">
+                <p>{{ neighborhood.name }}</p>
+                <img
+                    src="{{ neighborhood.imgUrl }}"
+                    alt="Image of {{ neighborhood.name }}"
+                />
+            </div>
+        </div>
+    </ng-template>
+    ```
 
-@Component({
-    selector: 'app-map',
-    templateUrl: './map.component.html',
-    styleUrls: ['./map.component.scss']
-})
-export class MapComponent implements AfterViewInit {
-    @Input() isLoading!: boolean | null;
-    @Input() errors!: any | null;
-    @Input() neighborhoods!: Neighborhood[] | null;
-    public leafletMap!: LeafletMap;
-    public tiles!: TileLayer;
-
-    ngAfterViewInit(): void {
-        this.createMap();
+    ```css
+    /* src/app/list/list.component.scss */
+    img {
+        height: 100px;
+        width: 100px;
     }
 
-    private createMap(): void {
-        this.leafletMap = new LeafletMap('leafletMapId').setView([41.2, -95.95], 9);
-        this.tiles = new TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-            maxZoom: 17,
-            minZoom: 6,
-        }).addTo(this.leafletMap);
+    .list-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        flex-wrap: wrap;
     }
-}
-```
+    ```
 
-13. Set up a Marker Service.
+    ![list implemented](/assets/images/leaflet-ngrx-data/list-implemented.png)
 
-14. Add Marker Service to Map.
+20. Install package [leafletjs](https://leafletjs.com/index.html) packages for Angular.
+
+    > We'll be leveraging leaflet types in this demo.
+
+    ```
+    $ npm install leaflet
+    $ npm install --save-dev @types/leaflet
+    ```
+
+21. Set up a basic leaflet map with open street map tile layer.
+
+    ```css
+    /* src/styles.scss */
+    @import "~leaflet/dist/leaflet.css";
+    ```
+
+    ```html
+    <!-- src/app/map/map.component.html -->
+    <div id="leafletMapId" class="map"></div>
+    ```
+
+    ```css
+    /* src/app/map/map.component.scss */
+    .map {
+        height: 100%;
+    }
+    ```
+
+    ```typescript
+    // src/app/map/map.component.ts
+    import { AfterViewInit, Component } from "@angular/core";
+    import { Map as LeafletMap, TileLayer } from "leaflet";
+
+    @Component({
+        selector: "app-map",
+        templateUrl: "./map.component.html",
+        styleUrls: ["./map.component.scss"],
+    })
+    export class MapComponent implements AfterViewInit {
+        public leafletMap!: LeafletMap;
+        private readonly openStreetMapUrl =
+            "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
+        private readonly openStreetMapAttribution =
+            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+        public tiles = new TileLayer(this.openStreetMapUrl, {
+            attribution: this.openStreetMapAttribution,
+        });
+
+        ngAfterViewInit(): void {
+            this.createMap();
+        }
+
+        private createMap(): void {
+            this.leafletMap = new LeafletMap("leafletMapId", {
+                center: {
+                    lat: 41.2635,
+                    lng: -95.9527,
+                },
+                layers: [this.tiles],
+                maxZoom: 17,
+                minZoom: 6,
+                zoom: 12,
+            });
+        }
+    }
+    ```

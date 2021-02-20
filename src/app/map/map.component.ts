@@ -1,5 +1,5 @@
 import { AfterViewInit, Component } from '@angular/core';
-import { Map as LeafletMap, TileLayer } from 'leaflet';
+import { Map as LeafletMap } from 'leaflet';
 import { MarkerService } from '../services/marker.service';
 import { TilesService } from '../services/tiles.service';
 
@@ -28,10 +28,9 @@ export class MapComponent implements AfterViewInit {
                 lat: 41.2635,
                 lng: -95.9527,
             },
-            // layers: [this.tiles],
             maxZoom: 17,
             minZoom: 6,
-            zoom: 12,
+            zoom: 11,
         });
     }
 }

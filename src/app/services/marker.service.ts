@@ -34,13 +34,7 @@ export class MarkerService {
                 const marker = new Marker([lat, lng], {
                     icon: this.icon,
                 }).addTo(map);
-                marker.bindPopup(
-                    `<div class="popup">
-                        <h3>${n.name}</h3>
-                        <img style="max-width: -webkit-fill-available;" src="${n.imgUrl}"/>
-                        <a href="${n.url}">wikipedia</p>
-                    </div>`
-                );
+                marker.bindPopup(`${n.name}`);
             }
         });
     }
